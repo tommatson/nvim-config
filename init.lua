@@ -32,6 +32,8 @@ config = function()
 		mirage = false,
 		terminal = false, -- false so terminal can manage it's own colours
 		overrides = {
+			LineNr = { fg = '#707070'},
+			CursorLineNr = {fg = '#BDBDBD', bold = true}
 		},
 
 
@@ -41,4 +43,12 @@ end,
 
 }
 
-})	
+})
+
+-- Force disable auto-commenting for EVERY file type
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ 'r', 'o' })
+  end,
+})
