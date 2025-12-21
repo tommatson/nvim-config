@@ -36,8 +36,8 @@ vim.keymap.set('n', '<C-g>', '<C-r>', { desc = 'Redo' })
 -- Redo in insert mode
 vim.keymap.set('i', '<C-g>', '<C-o><C-r>', { desc = 'Redo' })
 
--- Map paste to Cmd P
-vim.keymap.set('i', '<C-]>', '<C-r>+', { desc= "Paste from system clipboard"})
+-- Map paste to Cmd V
+vim.keymap.set('i', '<C-]>', '<C-r><C-p>+', { desc= "Paste from system clipboard"})
 vim.keymap.set('n', '<C-]>', '"+p', { desc = 'Paste from system clipboard'})
 
 -- Save all keymap
