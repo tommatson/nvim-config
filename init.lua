@@ -1,3 +1,6 @@
+require 'core.options'
+require 'core.keymaps'
+
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
@@ -16,10 +19,26 @@ require('lazy').setup({
     dependencies = {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
-      "nvim-tree/nvim-web-devicons", -- optional, but recommended
+      "nvim-tree/nvim-web-devicons", 
     },
-    lazy = false, -- neo-tree will lazily load itself
-  
-}	
+    lazy = false,   
+},
+{
+'Shatur/neovim-ayu',
+lazy = false,
+priority = 1000,
+config = function()
+	require('ayu').setup({
+		mirage = false,
+		terminal = false, -- false so terminal can manage it's own colours
+		overrides = {
+		},
+
+
+	})
+	vim.cmd.colorscheme "ayu"
+end,
+
+}
 
 })	
