@@ -89,3 +89,10 @@ vim.opt.runtimepath:remove '/usr/share/vim/vimfiles'
 -- Scrolling
 vim.o.scrolloff = 4
 vim.o.sidescrolloff = 8
+
+-- Chooses what characters w and arrows skip over
+vim.opt.iskeyword:append("-")
+vim.opt.iskeyword:append(".")
+
+
+
