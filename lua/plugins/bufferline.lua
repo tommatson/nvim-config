@@ -2,8 +2,15 @@ return {
   'akinsho/bufferline.nvim',
   dependencies = {
     'moll/vim-bbye',
-    'nvim-tree/nvim-web-devicons',
+    
   },
+
+  keys = {
+      { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+      { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+      { "<leader>x", "<cmd>Bdelete!<cr>", desc = "Close Buffer" },
+  },    
+
   config = function()
     require('bufferline').setup {
       options = {
