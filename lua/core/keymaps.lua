@@ -10,9 +10,6 @@ vim.keymap.set({'n', 'v'}, '<Space>', '<Nop>', { silent = true})
 -- Open and close neotree
 vim.keymap.set('n', '<leader>c', ':Neotree toggle<CR>', { silent = true, desc = 'Toggle Explorer' })
 
--- Select between neotree and codespace
-vim.keymap.set('n', '<leader>s', '<C-w>p', { silent = true, desc = 'Switch Window Focus' })
-
 -- Save file, map save to ctrl s, but in terminal settings change cmd s to ctrl s
 vim.keymap.set({'n', 'i'}, '<C-s>', '<cmd> w <CR>', { noremap = true, silent = true, desc = 'Save File'})
 

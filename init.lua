@@ -17,7 +17,10 @@ require('lazy').setup({
     require 'plugins.neotree',
     require 'plugins.bufferline',
     require 'plugins.lualine',
-    require 'plugins.treesitter'
+    require 'plugins.treesitter',
+    require 'plugins.telescope',
+    require 'plugins.lsp',
+    require 'plugins.autocompletion',
 })
 
 -- Force disable auto-commenting for EVERY file type
