@@ -28,10 +28,11 @@ vim.o.undofile = true
 
 -- Indentation settings
 -- Convert tabs to spaces
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+
 -- Smart backspace
-vim.opt.softtabstop = 4
+vim.opt.softtabstop = 2 
 -- Never add real tab character
 vim.opt.expandtab = true
 -- If wrapped, keep indent
