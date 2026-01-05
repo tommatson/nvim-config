@@ -33,6 +33,25 @@ return {
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
+
+        vim.api.nvim_create_autocmd('CursorHold', {
+          buffer = event.buf,
+          callback = function()
+            local opts = {
+              focusable = false,
+              close_events = { "CursorMoved", "CursorMovedI", "BufLeave" },
+              focus = false,
+              -- Use a border to make it look like a "box"
+              border = 'rounded',
+              source = 'always', -- Shows which LSP sent the error (e.g., "pyright")
+              prefix = ' ',
+              scope = 'cursor',
+            }
+            vim.diagnostic.open_float(nil, opts)
+          end,
+        })
+
+
         -- Create a function that lets us more easily define mappings specific
         -- for LSP related items. It sets the mode, buffer and description for us each time.
         local map = function(keys, func, desc, mode)
