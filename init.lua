@@ -24,6 +24,7 @@ require('lazy').setup({
     require 'plugins.gitsigns',
     require 'plugins.alpha',
     require 'plugins.markdown',
+    require 'plugins.rust',
 })
 
 -- Force disable auto-commenting for EVERY file type
