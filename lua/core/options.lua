@@ -18,6 +18,9 @@ vim.opt.linebreak = true
 
 -- Auto indent on new line
 vim.opt.autoindent = true
+vim.opt.smartindent = true
+
+
 
 -- Search case insensitive
 vim.ignorecase= true
