@@ -25,7 +25,8 @@ require('lazy').setup({
     require 'plugins.alpha',
     require 'plugins.markdown',
     require 'plugins.rust',
-    require 'plugins.autopairs'
+    require 'plugins.autopairs',
+    require 'plugins.colourhighlight',
 })
 
 -- Force disable auto-commenting for EVERY file type
