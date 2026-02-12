@@ -1,19 +1,16 @@
 return {
-'Shatur/neovim-ayu',
+'Mofiqul/vscode.nvim',
 lazy = false,
 priority = 1000,
 config = function()
-	require('ayu').setup({
-		mirage = false,
-		terminal = false, -- false so terminal can manage it's own colours
-		overrides = {
-			LineNr = { fg = '#707070'},
-			CursorLineNr = {fg = '#BDBDBD', bold = true}
-		},
-
+	require('vscode').setup({
+    color_overrides = {
+      vscBack = '#000000',
+      vscCursorDarkDark = '#000000',
+    },
 
 	})
-	vim.cmd.colorscheme "ayu"
+	vim.cmd.colorscheme "vscode"
 end,
 
 }
