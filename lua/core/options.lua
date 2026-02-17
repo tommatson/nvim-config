@@ -21,13 +21,12 @@ vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.cindent = true
 
-
 -- Search case insensitive
-vim.ignorecase= true
+vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Save undo history
-vim.o.undofile = true
+vim.opt.undofile = true
 
 -- Indentation settings
 -- Convert tabs to spaces
@@ -71,15 +70,14 @@ vim.opt.swapfile = false
 vim.opt.fileencoding = 'utf-8'
 
 vim.opt.backup = false
-
 vim.opt.writebackup = false
 
 -- Option completion
 vim.opt.completeopt = 'menuone,noselect'
 
 -- Backspace logic
-vim.o.backspace = 'indent,eol,start'
-vim.o.whichwrap = 'bs<>[]hl'
+vim.opt.backspace = 'indent,eol,start'
+vim.opt.whichwrap = 'bs<>[]hl'
 
 -- Stop autocomplete spam
 vim.opt.shortmess:append 'c'
@@ -87,16 +85,13 @@ vim.opt.shortmess:append 'c'
 -- Disable continuing comments
 vim.opt.formatoptions:remove({ 'c', 'r', 'o' })
 
--- Do not load old pulgins
+-- Do not load old plugins
 vim.opt.runtimepath:remove '/usr/share/vim/vimfiles'
 
 -- Scrolling
-vim.o.scrolloff = 4
-vim.o.sidescrolloff = 8
+vim.opt.scrolloff = 4
+vim.opt.sidescrolloff = 8
 
 -- Chooses what characters w and arrows skip over
 vim.opt.iskeyword:append("-")
 vim.opt.iskeyword:append(".")
-
-
-
