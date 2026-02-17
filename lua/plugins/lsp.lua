@@ -161,7 +161,10 @@ return {
     -- - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
     -- - settings (table): Override the default settings passed when initializing the server.
     local servers = {
-      clangd = {},
+      -- [FIX] Clangd: This flag tells clangd to add brackets "func()" but NOT the placeholders inside.
+      clangd = {
+        cmd = { 'clangd', '--function-arg-placeholders=0' },
+      },
       autotools_ls = {},
       ts_ls = {},
       ruff = {},
@@ -193,7 +196,9 @@ return {
         settings = {
           Lua = {
             completion = {
-              callSnippet = 'Replace',
+              -- [FIX] 'Disable' stops the LSP from filling in args. 
+              -- 'Replace' (the default) is what was filling them in.
+              callSnippet = 'Disable', 
             },
             runtime = { version = 'LuaJIT' },
             workspace = {
