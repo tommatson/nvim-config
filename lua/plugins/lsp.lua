@@ -163,10 +163,23 @@ return {
     local servers = {
       -- [FIX] Clangd: This flag tells clangd to add brackets "func()" but NOT the placeholders inside.
       clangd = {
-        cmd = { 'clangd', '--function-arg-placeholders=0' },
+        cmd = { 'clangd', '--function-arg-placeholders=0', '--header-insertion=never' },
       },
       autotools_ls = {},
-      ts_ls = {},
+      ts_ls = {
+        settings = {
+          typescript = {
+            suggest = {
+              autoImports = false,
+            },
+          },
+          javascript = {
+            suggest = {
+              autoImports = false,
+            },
+          },
+        },
+      },
       ruff = {},
       pylsp = {
         settings = {
