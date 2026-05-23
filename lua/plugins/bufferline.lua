@@ -51,7 +51,7 @@ return {
         },
         sort_by = 'insert_at_end',
       },
-      highlights = require('catppuccin.groups.integrations.bufferline').get(),
+      highlights = {},
     }
   end,
 }
