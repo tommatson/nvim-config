@@ -1,18 +1,18 @@
 return {
   'nvim-lualine/lualine.nvim',
+  event = 'VeryLazy',
   config = function()
     local mode = {
       'mode',
       fmt = function(str)
-        return ' ' .. str
-        -- return ' ' .. str:sub(1, 1) -- displays only the first character of the mode
+        return ' ' .. str
       end,
     }
 
     local filename = {
       'filename',
-      file_status = true, -- displays file status (readonly status, modified status)
-      path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
+      file_status = true,
+      path = 0,
     }
 
     local hide_in_width = function()
@@ -23,8 +23,8 @@ return {
       'diagnostics',
       sources = { 'nvim_diagnostic' },
       sections = { 'error', 'warn' },
-      symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
-      colored = false,
+      symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+      colored = true,
       update_in_insert = false,
       always_visible = false,
       cond = hide_in_width,
@@ -32,22 +32,20 @@ return {
 
     local diff = {
       'diff',
-      colored = false,
-      symbols = { added = ' ', modified = ' ', removed = ' ' }, -- changes diff symbols
+      colored = true,
+      symbols = { added = ' ', modified = ' ', removed = ' ' },
       cond = hide_in_width,
     }
 
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        theme = 'ayu', -- Set theme based on environment variable
-        -- Some useful glyphs:
-        -- https://www.nerdfonts.com/cheat-sheet
-        --        
-        section_separators = { left = '', right = '' },
-        component_separators = { left = '', right = '' },
+        theme = 'auto',
+        section_separators = { left = '', right = '' },
+        component_separators = { left = '', right = '' },
         disabled_filetypes = { 'alpha', 'neo-tree' },
         always_divide_middle = true,
+        globalstatus = true,
       },
       sections = {
         lualine_a = { mode },
@@ -66,7 +64,7 @@ return {
         lualine_z = {},
       },
       tabline = {},
-      extensions = { 'fugitive' },
+      extensions = { 'fugitive', 'neo-tree', 'lazy' },
     }
   end,
 }
