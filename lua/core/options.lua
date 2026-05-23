@@ -1,97 +1,86 @@
 -- Options
 
--- Show line numbers
 vim.opt.number = true
-
--- Relative line numbers
 vim.opt.relativenumber = false
-
--- Line we're on looks different for the line number
 vim.opt.cursorline = true
 
--- Allow copy
+-- System clipboard
 vim.opt.clipboard = 'unnamedplus'
+
+-- Mouse support (click, drag-select, scroll, resize splits)
+vim.opt.mouse = 'a'
+vim.opt.mousemodel = 'extend'
+vim.opt.mousescroll = 'ver:3,hor:6'
 
 -- No wrapping
 vim.opt.wrap = false
 vim.opt.linebreak = true
 
--- Auto indent on new line
+-- Indentation
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.cindent = true
-
--- Search case insensitive
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
--- Save undo history
-vim.opt.undofile = true
-
--- Indentation settings
--- Convert tabs to spaces
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
-
--- Smart backspace
-vim.opt.softtabstop = 2 
--- Never add real tab character
+vim.opt.softtabstop = 2
 vim.opt.expandtab = true
--- If wrapped, keep indent
 vim.opt.breakindent = true
 
--- Error hover time (ms)
-vim.opt.updatetime = 250
-
--- Persistent highlighting after search
+-- Search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 vim.opt.hlsearch = false
+vim.opt.incsearch = true
 
--- Make gutter always open for line numbers
+-- Undo
+vim.opt.undofile = true
+
+-- Timing
+vim.opt.updatetime = 200
+vim.opt.timeoutlen = 400
+
+-- UI
 vim.opt.signcolumn = 'yes'
-
--- Enable more colours
 vim.opt.termguicolors = true
-
--- Show actual markdown
 vim.opt.conceallevel = 0
-
--- Limit autocomplete list
 vim.opt.pumheight = 10
+vim.opt.cmdheight = 1
+vim.opt.showmode = false
+vim.opt.laststatus = 3
 
-vim.opt.cmdheight = 1 
+-- Smooth scrolling (neovim 0.10+)
+vim.opt.smoothscroll = true
 
--- Where new tabs appear 
+-- Splits open in sensible directoins
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
--- No crash file save
+-- No swap or backup
 vim.opt.swapfile = false
-
-vim.opt.fileencoding = 'utf-8'
-
 vim.opt.backup = false
 vim.opt.writebackup = false
+vim.opt.fileencoding = 'utf-8'
 
--- Option completion
+-- Completion
 vim.opt.completeopt = 'menuone,noselect'
 
--- Backspace logic
+-- Backspace
 vim.opt.backspace = 'indent,eol,start'
 vim.opt.whichwrap = 'bs<>[]hl'
 
--- Stop autocomplete spam
-vim.opt.shortmess:append 'c'
-
--- Disable continuing comments
-vim.opt.formatoptions:remove({ 'c', 'r', 'o' })
-
--- Do not load old plugins
-vim.opt.runtimepath:remove '/usr/share/vim/vimfiles'
-
--- Scrolling
-vim.opt.scrolloff = 4
+-- Scrolling context
+vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 
--- Chooses what characters w and arrows skip over
-vim.opt.iskeyword:append("-")
-vim.opt.iskeyword:append(".")
+-- Word boundaries
+vim.opt.iskeyword:append('-')
+vim.opt.iskeyword:append('.')
+
+-- Suppress completion messages
+vim.opt.shortmess:append 'c'
+
+-- Disable auto-commenting on new lines
+vim.opt.formatoptions:remove({ 'c', 'r', 'o' })
+
+-- Skip old vim runtime
+vim.opt.runtimepath:remove '/usr/share/vim/vimfiles'
