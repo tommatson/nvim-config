@@ -38,3 +38,24 @@ vim.keymap.set('n', '[q', ':cprev<CR>zz', { silent = true, desc = 'Prev quickfix
 -- Diagnostic navigation
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Prev diagnostic' })
+
+-- Alphanumeric jumping with Shift+arrows (skips punctuation/symbols, ignores CamelCase)
+local alphanumeric_pattern = [=[\v(^[^a-zA-Z0-9]*\zs[a-zA-Z0-9])|([^a-zA-Z0-9]\zs[a-zA-Z0-9])]=]
+
+vim.keymap.set({ 'n', 'v' }, '<S-Right>', function()
+  vim.fn.search(alphanumeric_pattern, 'W')
+end, { desc = 'Jump right (Alphanumeric)' })
+
+vim.keymap.set({ 'n', 'v' }, '<S-Left>', function()
+  vim.fn.search(alphanumeric_pattern, 'bW')
+end, { desc = 'Jump left (Alphanumeric)' })
+
+vim.keymap.set('i', '<S-Right>', function()
+  vim.cmd('normal! l')
+  vim.fn.search(alphanumeric_pattern, 'W')
+end, { desc = 'Jump right (Alphanumeric)' })
+
+vim.keymap.set('i', '<S-Left>', function()
+  vim.cmd('normal! h')
+  vim.fn.search(alphanumeric_pattern, 'bW')
+end, { desc = 'Jump left (Alphanumeric)' })
