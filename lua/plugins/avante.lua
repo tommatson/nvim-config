@@ -22,6 +22,7 @@ return {
           endpoint = server_url .. '/v1',
           api_key_name = 'AVANTE_API_KEY',
           model = model_name,
+          context_window = 16384, -- Set context window limit so avante knows when to truncate context
           extra_request_body = {
             temperature = 0.7, -- Recommended for non-thinking / instruct mode
             top_p = 0.80,
@@ -36,6 +37,7 @@ return {
           endpoint = server_url .. '/v1',
           api_key_name = 'AVANTE_API_KEY',
           model = model_name,
+          context_window = 16384, -- Set context window limit so avante knows when to truncate context
           extra_request_body = {
             temperature = 0.6, -- Recommended for precise coding/thinking tasks
             top_p = 0.95,
