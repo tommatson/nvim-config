@@ -8,7 +8,7 @@ return {
     },
     spec = {
       { '<leader>s', group = 'Search' },
-      { '<leader>c', group = 'Code / Explorer' },
+      { '<leader>c', group = 'Code' },
       { '<leader>d', group = 'Document' },
       { '<leader>w', group = 'Workspace' },
       { '<leader>t', group = 'Toggle' },
