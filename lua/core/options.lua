@@ -10,7 +10,7 @@ vim.opt.clipboard = 'unnamedplus'
 -- Mouse support (click, drag-select, scroll, resize splits)
 vim.opt.mouse = 'a'
 vim.opt.mousemodel = 'extend'
-vim.opt.mousescroll = 'ver:3,hor:6'
+vim.opt.mousescroll = 'ver:1,hor:1'
 
 -- No wrapping
 vim.opt.wrap = false

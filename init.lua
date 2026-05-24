@@ -33,7 +33,6 @@ require('lazy').setup({
   require 'plugins.whichkey',
   require 'plugins.indent',
   require 'plugins.noice',
-  require 'plugins.smoothcursor',
   require 'plugins.todo',
   require 'plugins.surround',
 })
