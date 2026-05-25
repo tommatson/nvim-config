@@ -14,6 +14,7 @@ return {
       { '<leader>t', group = 'Toggle' },
       { '<leader>n', group = 'Neo-tree' },
       { '<leader>r', group = 'Rename' },
+      { '<leader>a', group = 'AI Assistant' },
     },
   },
 }
