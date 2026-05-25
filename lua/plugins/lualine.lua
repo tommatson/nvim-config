@@ -37,6 +37,13 @@ return {
       cond = hide_in_width,
     }
 
+    local function codecompanion_status()
+      if vim.g.codecompanion_spinner and vim.g.codecompanion_spinner ~= "" then
+        return vim.g.codecompanion_spinner .. " AI"
+      end
+      return ""
+    end
+
     require('lualine').setup {
       options = {
         icons_enabled = true,
@@ -51,7 +58,13 @@ return {
         lualine_a = { mode },
         lualine_b = { 'branch' },
         lualine_c = { filename },
-        lualine_x = { diagnostics, diff, { 'encoding', cond = hide_in_width }, { 'filetype', cond = hide_in_width } },
+        lualine_x = {
+          diagnostics,
+          diff,
+          { codecompanion_status, color = { fg = '#ff9e64' } },
+          { 'encoding', cond = hide_in_width },
+          { 'filetype', cond = hide_in_width },
+        },
         lualine_y = { 'location' },
         lualine_z = { 'progress' },
       },

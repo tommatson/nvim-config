@@ -18,7 +18,7 @@ return {
       popup_border_style = 'rounded',
       enable_git_status = true,
       enable_diagnostics = true,
-      open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' },
+      open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf', 'codecompanion' },
       default_component_configs = {
         indent = {
           indent_size = 2,

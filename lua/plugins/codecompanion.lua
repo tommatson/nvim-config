@@ -13,10 +13,29 @@ return {
     local model_name = env.AI_MODEL_NAME or 'unsloth/Qwen3.6-27B-MTP-GGUF:Q5_K_M'
     local api_key = env.AI_API_KEY or 'EMPTY'
 
+    vim.g.codecompanion_spinner = ""
+
     require("codecompanion").setup({
       strategies = {
         chat = {
           adapter = "my_local_openai_thinking",
+          tools = {
+            opts = {
+              default_tools = {
+                "ask_questions",
+                "create_file",
+                "delete_file",
+                "file_search",
+                "get_changed_files",
+                "get_diagnostics",
+                "grep_search",
+                "insert_edit_into_file",
+                "read_file",
+                "run_command",
+                "web_search",
+              },
+            },
+          },
         },
         inline = {
           adapter = "my_local_openai",
@@ -126,6 +145,59 @@ return {
           end,
         },
       },
+    })
+
+    -- Spinner / Loading indicator logic
+    local spinner_frames = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+    local spinner_idx = 1
+    local spinner_timer = nil
+    local fidget_progress = nil
+
+    local function start_spinner()
+      if spinner_timer then return end
+      local uv = vim.uv or vim.loop
+      spinner_timer = uv.new_timer()
+      spinner_timer:start(0, 80, vim.schedule_wrap(function()
+        spinner_idx = (spinner_idx % #spinner_frames) + 1
+        vim.g.codecompanion_spinner = spinner_frames[spinner_idx]
+        pcall(function() require("lualine").refresh() end)
+      end))
+    end
+
+    local function stop_spinner()
+      if spinner_timer then
+        spinner_timer:stop()
+        spinner_timer:close()
+        spinner_timer = nil
+      end
+      vim.g.codecompanion_spinner = ""
+      pcall(function() require("lualine").refresh() end)
+    end
+
+    local group = vim.api.nvim_create_augroup("CodeCompanionHooks", { clear = true })
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "CodeCompanionRequest*",
+      group = group,
+      callback = function(request)
+        if request.match == "CodeCompanionRequestStarted" then
+          start_spinner()
+          local ok, fidget = pcall(require, "fidget")
+          if ok then
+            fidget_progress = fidget.progress.handle.create({
+              title = "CodeCompanion",
+              message = "Thinking...",
+              lsp_client = { name = "CodeCompanion" },
+            })
+          end
+        elseif request.match == "CodeCompanionRequestFinished" then
+          stop_spinner()
+          if fidget_progress then
+            fidget_progress:finish()
+            fidget_progress = nil
+          end
+        end
+      end,
     })
 
     -- Global Keymaps
