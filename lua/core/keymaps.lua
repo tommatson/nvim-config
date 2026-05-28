@@ -84,3 +84,41 @@ end, { desc = 'Jump left (Alphanumeric)' })
 -- Inverse trackpad/mouse scroll wheel directions
 vim.keymap.set({ 'n', 'v', 'i' }, '<ScrollWheelLeft>', '<ScrollWheelRight>')
 vim.keymap.set({ 'n', 'v', 'i' }, '<ScrollWheelRight>', '<ScrollWheelLeft>')
+
+-- Insert styled comment banner (e.g., // ----------- )
+local function insert_comment_banner()
+  local commentstring = vim.bo.commentstring
+  if not commentstring or commentstring == "" then
+    commentstring = "// %s"
+  end
+
+  local prefix, suffix = commentstring:match("^(.-)%%s(.-)$")
+  prefix = prefix or "// "
+  suffix = suffix or ""
+
+  prefix = prefix:gsub("%s+$", "") .. " "
+  if suffix ~= "" then
+    suffix = " " .. suffix:gsub("^%s+", "")
+  end
+
+  vim.ui.input({ prompt = "Banner Title: " }, function(input)
+    if not input or input == "" then return end
+
+    local width = 80
+    local comment_len = string.len(prefix) + string.len(suffix)
+    local dash_len = width - comment_len
+    if dash_len < 5 then dash_len = 5 end
+    local separator_line = string.rep("-", dash_len)
+
+    local lines = {
+      prefix .. separator_line .. suffix,
+      prefix .. input .. suffix,
+      prefix .. separator_line .. suffix,
+    }
+
+    vim.api.nvim_put(lines, "l", true, true)
+  end)
+end
+
+vim.keymap.set("n", "<leader>cb", insert_comment_banner, { desc = "Insert comment banner" })
+
