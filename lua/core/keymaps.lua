@@ -101,9 +101,41 @@ local function insert_comment_banner()
     suffix = " " .. suffix:gsub("^%s+", "")
   end
 
-  -- Get active indentation of current line
-  local current_line = vim.fn.getline('.')
-  local indent = current_line:match("^%s*") or ""
+  -- Get active local scope indentation of a newline by temporarily inserting one
+  local lnum = vim.fn.line('.')
+  vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { "" })
+  local new_lnum = lnum + 1
+  local indent_val = -1
+
+  if vim.bo.indentexpr ~= "" then
+    local save_lnum = vim.v.lnum
+    vim.v.lnum = new_lnum
+    local ok, val = pcall(vim.api.nvim_eval, vim.bo.indentexpr)
+    vim.v.lnum = save_lnum
+    if ok and type(val) == "number" and val >= 0 then
+      indent_val = val
+    end
+  end
+
+  if indent_val < 0 and vim.bo.cindent then
+    indent_val = vim.fn.cindent(new_lnum)
+  end
+
+  if indent_val < 0 then
+    indent_val = vim.fn.indent(lnum)
+  end
+
+  -- Delete the temporary line
+  vim.api.nvim_buf_set_lines(0, lnum, lnum + 1, false, {})
+
+  local indent = ""
+  if not vim.bo.expandtab then
+    local tabstop = vim.bo.tabstop
+    if tabstop <= 0 then tabstop = 8 end
+    indent = string.rep("\t", math.floor(indent_val / tabstop)) .. string.rep(" ", indent_val % tabstop)
+  else
+    indent = string.rep(" ", indent_val)
+  end
   local indent_len = string.len(indent)
 
   vim.ui.input({ prompt = "Banner Title: " }, function(input)
