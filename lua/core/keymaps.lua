@@ -5,6 +5,10 @@ vim.g.maplocalleader = ' '
 -- Disable spacebar default
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
+-- Delete character without copying (black hole register)
+vim.keymap.set({ 'n', 'v' }, 'x', '"_x', { desc = 'Delete character without copying' })
+
+
 -- Disable suspension (Ctrl-Z)
 vim.keymap.set({ 'n', 'v', 'i', 'c' }, '<C-z>', '<Nop>', { silent = true })
 
