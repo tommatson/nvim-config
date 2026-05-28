@@ -41,19 +41,32 @@ vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end, { 
 
 -- Alphanumeric jumping with Shift+arrows (skips punctuation/symbols, ignores CamelCase)
 local alphanumeric_pattern = [=[\v(^[^a-zA-Z0-9]*\zs[a-zA-Z0-9])|([^a-zA-Z0-9]\zs[a-zA-Z0-9])]=]
+local alphanumeric_end_pattern = [=[\v[a-zA-Z0-9]\ze([^a-zA-Z0-9]|$)]=]
 
-vim.keymap.set({ 'n', 'v' }, '<S-Right>', function()
-  vim.fn.search(alphanumeric_pattern, 'W')
-end, { desc = 'Jump right (Alphanumeric)' })
+vim.keymap.set('n', '<S-Right>', function()
+  if vim.fn.search(alphanumeric_end_pattern, 'W') > 0 then
+    local col = vim.fn.col('.')
+    local line_len = string.len(vim.fn.getline('.'))
+    if col < line_len then
+      vim.cmd('normal! l')
+    end
+  end
+end, { desc = 'Jump right (Alphanumeric End)' })
+
+vim.keymap.set('v', '<S-Right>', function()
+  vim.fn.search(alphanumeric_end_pattern, 'W')
+end, { desc = 'Jump right (Alphanumeric End)' })
 
 vim.keymap.set({ 'n', 'v' }, '<S-Left>', function()
   vim.fn.search(alphanumeric_pattern, 'bW')
 end, { desc = 'Jump left (Alphanumeric)' })
 
 vim.keymap.set('i', '<S-Right>', function()
-  vim.cmd('normal! l')
-  vim.fn.search(alphanumeric_pattern, 'W')
-end, { desc = 'Jump right (Alphanumeric)' })
+  if vim.fn.search(alphanumeric_end_pattern, 'W') > 0 then
+    local pos = vim.api.nvim_win_get_cursor(0)
+    vim.api.nvim_win_set_cursor(0, { pos[1], pos[2] + 1 })
+  end
+end, { desc = 'Jump right (Alphanumeric End)' })
 
 vim.keymap.set('i', '<S-Left>', function()
   vim.cmd('normal! h')
