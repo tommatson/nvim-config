@@ -74,7 +74,5 @@ vim.keymap.set('i', '<S-Left>', function()
 end, { desc = 'Jump left (Alphanumeric)' })
 
 -- Inverse trackpad/mouse scroll wheel directions
-vim.keymap.set({ 'n', 'v', 'i' }, '<ScrollWheelUp>', '<ScrollWheelDown>')
-vim.keymap.set({ 'n', 'v', 'i' }, '<ScrollWheelDown>', '<ScrollWheelUp>')
 vim.keymap.set({ 'n', 'v', 'i' }, '<ScrollWheelLeft>', '<ScrollWheelRight>')
 vim.keymap.set({ 'n', 'v', 'i' }, '<ScrollWheelRight>', '<ScrollWheelLeft>')
