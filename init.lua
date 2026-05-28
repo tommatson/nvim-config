@@ -36,6 +36,7 @@ require('lazy').setup({
   require 'plugins.todo',
   require 'plugins.surround',
   require 'plugins.codecompanion',
+  require 'plugins.rainbow',
 })
 
 -- Disable auto-commenting on new lines for all filetypes
