@@ -101,19 +101,24 @@ local function insert_comment_banner()
     suffix = " " .. suffix:gsub("^%s+", "")
   end
 
+  -- Get active indentation of current line
+  local current_line = vim.fn.getline('.')
+  local indent = current_line:match("^%s*") or ""
+  local indent_len = string.len(indent)
+
   vim.ui.input({ prompt = "Banner Title: " }, function(input)
     if not input or input == "" then return end
 
     local width = 80
     local comment_len = string.len(prefix) + string.len(suffix)
-    local dash_len = width - comment_len
+    local dash_len = width - indent_len - comment_len
     if dash_len < 5 then dash_len = 5 end
     local separator_line = string.rep("-", dash_len)
 
     local lines = {
-      prefix .. separator_line .. suffix,
-      prefix .. input .. suffix,
-      prefix .. separator_line .. suffix,
+      indent .. prefix .. separator_line .. suffix,
+      indent .. prefix .. input .. suffix,
+      indent .. prefix .. separator_line .. suffix,
     }
 
     vim.api.nvim_put(lines, "l", true, true)
