@@ -5,6 +5,10 @@ vim.g.maplocalleader = ' '
 -- Disable spacebar default
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
+-- Disable suspension (Ctrl-Z)
+vim.keymap.set({ 'n', 'v', 'i', 'c' }, '<C-z>', '<Nop>', { silent = true })
+
+
 -- Save file (Standard Neovim mappings)
 vim.keymap.set('n', '<leader>w', '<cmd>w<CR>', { silent = true, desc = 'Save File' })
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<CR><esc>', { silent = true, desc = 'Save File' })
