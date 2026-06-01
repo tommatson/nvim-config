@@ -84,3 +84,11 @@ vim.opt.formatoptions:remove({ 'c', 'r', 'o' })
 
 -- Skip old vim runtime
 vim.opt.runtimepath:remove '/usr/share/vim/vimfiles'
+
+-- Filetype associations
+vim.filetype.add({
+  extension = {
+    tpp = 'cpp',
+  },
+})
+
